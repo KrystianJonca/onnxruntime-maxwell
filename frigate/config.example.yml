@@ -1,0 +1,16 @@
+# Relevant parts of Frigate's config.yml: ONNX detector on the CUDA EP with a YOLOv9 model.
+detectors:
+  onnx:
+    type: onnx
+
+model:
+  model_type: yolo-generic
+  width: 320
+  height: 320
+  input_tensor: nchw
+  input_dtype: float
+  path: /config/model_cache/yolov9-s-320.onnx   # built with ./model
+  labelmap_path: /labelmap/coco-80.txt
+
+ffmpeg:
+  hwaccel_args: preset-nvidia   # NVDEC decode also works on Maxwell

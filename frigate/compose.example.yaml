@@ -1,0 +1,11 @@
+services:
+  frigate:
+    image: frigate-maxwell:stable      # built from ./Dockerfile instead of ...frigate:stable-tensorrt
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    # ...the rest of your usual Frigate service definition

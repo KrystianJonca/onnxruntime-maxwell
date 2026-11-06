@@ -1,0 +1,17 @@
+# Only the machine-learning service changes. Everything else stays as in Immich's compose file.
+services:
+  immich-machine-learning:
+    container_name: immich_machine_learning
+    image: immich-ml-maxwell:v3        # built from ./Dockerfile instead of ...-machine-learning:v3-cuda
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    volumes:
+      - model-cache:/cache
+    env_file:
+      - .env
+    restart: always
